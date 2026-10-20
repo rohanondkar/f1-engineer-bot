@@ -1,0 +1,12 @@
+{
+  "id": "us_woman",
+  "display_name": "Us Woman",
+  "gender": "woman",
+  "region": "us",
+  "reference_wav": "",
+  "elevenlabs_voice_id": "",
+  "edge_voice": "en-US-AvaNeural",
+  "custom": false,
+  "notes": "Shipped pack \u2014 add reference.wav for local/ElevenLabs cloning",
+  "extra": {}
+}

@@ -1,0 +1,12 @@
+{
+  "id": "brazil_man",
+  "display_name": "Brazil Man",
+  "gender": "man",
+  "region": "brazil",
+  "reference_wav": "",
+  "elevenlabs_voice_id": "",
+  "edge_voice": "en-US-AndrewMultilingualNeural",
+  "custom": false,
+  "notes": "Shipped pack \u2014 add reference.wav for local/ElevenLabs cloning",
+  "extra": {}
+}

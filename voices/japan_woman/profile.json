@@ -1,0 +1,12 @@
+{
+  "id": "japan_woman",
+  "display_name": "Japan Woman",
+  "gender": "woman",
+  "region": "japan",
+  "reference_wav": "",
+  "elevenlabs_voice_id": "",
+  "edge_voice": "en-US-AvaMultilingualNeural",
+  "custom": false,
+  "notes": "Shipped pack \u2014 add reference.wav for local/ElevenLabs cloning",
+  "extra": {}
+}

@@ -1,0 +1,12 @@
+{
+  "id": "japan_man",
+  "display_name": "Japan Man",
+  "gender": "man",
+  "region": "japan",
+  "reference_wav": "",
+  "elevenlabs_voice_id": "",
+  "edge_voice": "en-US-AndrewMultilingualNeural",
+  "custom": false,
+  "notes": "Shipped pack \u2014 add reference.wav for local/ElevenLabs cloning",
+  "extra": {}
+}

@@ -1,0 +1,12 @@
+{
+  "id": "uk_man",
+  "display_name": "Uk Man",
+  "gender": "man",
+  "region": "uk",
+  "reference_wav": "",
+  "elevenlabs_voice_id": "",
+  "edge_voice": "en-GB-RyanNeural",
+  "custom": false,
+  "notes": "Shipped pack \u2014 add reference.wav for local/ElevenLabs cloning",
+  "extra": {}
+}

@@ -1,0 +1,12 @@
+{
+  "id": "italy_man",
+  "display_name": "Italy Man",
+  "gender": "man",
+  "region": "italy",
+  "reference_wav": "",
+  "elevenlabs_voice_id": "",
+  "edge_voice": "en-US-AndrewMultilingualNeural",
+  "custom": false,
+  "notes": "Shipped pack \u2014 add reference.wav for local/ElevenLabs cloning",
+  "extra": {}
+}
