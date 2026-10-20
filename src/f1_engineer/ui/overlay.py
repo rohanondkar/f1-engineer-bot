@@ -213,6 +213,19 @@ QPushButton#iconBtn:hover {{
     color: {C_TEXT};
     background: {C_ELEVATED};
 }}
+QPushButton#closeBtn {{
+    background: transparent;
+    color: {C_MUTED};
+    border: none;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 15px;
+    font-weight: 700;
+}}
+QPushButton#closeBtn:hover {{
+    color: white;
+    background: {C_RED};
+}}
 QFrame#divider {{
     background: {C_BORDER_SOFT};
     max-height: 1px;
@@ -363,6 +376,14 @@ class OverlayWindow(QMainWindow):
         min_btn.setToolTip("Minimize")
         min_btn.clicked.connect(self.showMinimized)
         chrome_l.addWidget(min_btn)
+
+        close_btn = QPushButton("✕")
+        close_btn.setObjectName("closeBtn")
+        close_btn.setFixedSize(32, 32)
+        close_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        close_btn.setToolTip("Quit")
+        close_btn.clicked.connect(self._quit_app)
+        chrome_l.addWidget(close_btn)
         outer.addWidget(chrome)
 
         # Body
@@ -653,6 +674,16 @@ class OverlayWindow(QMainWindow):
         else:
             self.warn.hide()
 
+    def _quit_app(self) -> None:
+        """Fully quit — stop engineer loop, hide tray, exit process."""
+        app = QApplication.instance()
+        if app is not None:
+            app.quit()
+
+    def closeEvent(self, event) -> None:  # noqa: N802
+        self._quit_app()
+        event.accept()
+
     def mousePressEvent(self, event) -> None:  # noqa: N802
         if event.button() == Qt.MouseButton.LeftButton:
             self._drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
@@ -680,7 +711,8 @@ def run_overlay(app: EngineerApp | None = None) -> int:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
     qt = QApplication(sys.argv)
-    qt.setQuitOnLastWindowClosed(False)
+    # X / close should exit the whole app (tray alone must not keep it alive)
+    qt.setQuitOnLastWindowClosed(True)
     qt.setStyle("Fusion")
 
     for family in ("Segoe UI Variable Display", "Segoe UI Variable", "Segoe UI"):
@@ -699,7 +731,7 @@ def run_overlay(app: EngineerApp | None = None) -> int:
     show_act = QAction("Show overlay")
     show_act.triggered.connect(win.show)
     quit_act = QAction("Quit")
-    quit_act.triggered.connect(qt.quit)
+    quit_act.triggered.connect(win._quit_app)
     menu.addAction(show_act)
     menu.addAction(quit_act)
     tray.setContextMenu(menu)
@@ -710,8 +742,12 @@ def run_overlay(app: EngineerApp | None = None) -> int:
     )
     tray.show()
 
+    def _on_about_to_quit() -> None:
+        tray.hide()
+        bridge.stop()
+
+    qt.aboutToQuit.connect(_on_about_to_quit)
+
     bridge.start()
     win.show()
-    code = qt.exec()
-    bridge.stop()
-    return code
+    return qt.exec()
